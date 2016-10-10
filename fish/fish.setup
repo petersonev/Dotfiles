@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source "$(dirname "$0")/../utils/functions"
+
+mkdir -p "$HOME/.config"
+overwrite_all=false backup_all=false skip_all=false
+link_file "$(dirname "$0")/fish" "$HOME/.config/fish"
