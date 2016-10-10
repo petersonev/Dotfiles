@@ -49,13 +49,18 @@ link_file () {
   local overwrite= backup= skip=
   local action=
 
+  #echo $dst
+
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
   then
+    echo "inside"
 
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
     then
 
       local currentSrc="$(readlink $dst)"
+      #echo $currentSrc
+      #echo $src
 
       if [ "$currentSrc" == "$src" ]
       then
@@ -109,6 +114,9 @@ link_file () {
     then
       success "skipped $src"
     fi
+  else
+    skip=true
+    success "unknown $src"
   fi
 
   if [ "$skip" != "true" ]  # "false" or empty
@@ -128,8 +136,8 @@ install_dotfiles () {
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
   done
+  for src_file in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.setup' -not -path '*.git*')
+  do
+    bash "$src_file"
+  done
 }
-
-setup_gitconfig
-install_dotfiles
-

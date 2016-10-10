@@ -1,7 +1,11 @@
+echo "first"
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/petersonev/.dotfiles/zsh/oh-my-zsh
 
 source ~/.zsh-private
+
+#eval "$(fasd --init posix-alias zsh-hook)"
+eval "$(fasd --init auto)"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -55,7 +59,7 @@ source ~/.zsh-private
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git osx)
 
 # User configuration
 
@@ -133,6 +137,9 @@ export RPROMPT='$(makeRPrompt)'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ $COLUMNS -gt 77 ]; then
-  archey -p
-fi
+#if [ $COLUMNS -gt 77 ]; then
+#  archey -p
+#fi
+
+source $ZSH/../zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/../zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
