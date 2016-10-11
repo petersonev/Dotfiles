@@ -1,100 +1,55 @@
-echo "first"
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/petersonev/.dotfiles/zsh/oh-my-zsh
+export ZSH="$0:A/oh-my-zsh"
 
-source ~/.zsh-private
+#source ~/.zsh-private
 
 #eval "$(fasd --init posix-alias zsh-hook)"
 eval "$(fasd --init auto)"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# ZSH_THEME="robbyrussell"
-# ZSH_THEME="pygmalion"
-# ARROW=$'\xEE\x82\xB0'
-# PS1="\[\e[48;5;31m\] \t\[\e[38;5;31m\]";
-# PS1="$PS1\[\e[48;5;241m\]$ARROW\[\e[48;5;241;38;5;248m\] \W\[\e[38;5;235;49m\]$ARROW \[\e[0m\]";
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx)
+plugins=(git)
 
 # User configuration
-
-export PATH="/opt/theos/bin:/usr/local/sbin:$PATH"
-export PATH="~/.pebble-dev/PebbleSDK-3.4/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/bin:$PATH"
-export PATH="/bin:/usr/sbin:$PATH"
-export PATH="/sbin:/opt/X11/bin:/Library/TeX/texbin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-export Path="/usr/local/sbin:$PATH"
-
 source $ZSH/oh-my-zsh.sh
-
-# export ARROW=$'\xEE\x82\xB0'
-# export PROMPT=$'%{\e[48;5;31m%}%* $ARROW '
 
 unset zle_bracketed_paste
 
 function makePrompt () {
-  local exit_status=$?
-  local ARROW=$'\xEE\x82\xB0'
-  local GIT=$'\xEE\x82\xA0'
-  local b="$(git symbolic-ref HEAD 2>/dev/null)";
+     local exit_status=$?
+     OUT=""
+ 
+     local prompt_char=$'\xE2\x9D\xAF'
+ 
+     local color_TRUE="%{\033[34m%}"
+     local color_FALSE="%{\033[37m%}"
+     local color_ERROR="%{\033[31m%}"
+ 
+     local color_user=$color_FALSE
+     local color_jobs=$color_FALSE
+     local color_exit=$color_TRUE
+ 
+     if [ "$USER" = "root" ]; then
+         color_user=$color_ERROR
+     fi
+     if [ $(jobs | wc -l | tr -d " ") -ne 0 ]; then
+         color_jobs=$color_TRUE
+     fi
+     if [ $exit_status -ne 0 ]; then
+         color_exit=$color_ERROR
+     fi
+ 
+     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+         OUT="$PS1$color_TRUE\h:"
+     fi
+ 
+     #OUT="$prompt_char "
+     OUT="$OUT$color_TRUE%1~ "
+     OUT="$OUT$color_user$prompt_char"
+     OUT="$OUT$color_jobs$prompt_char"
+     OUT="$OUT$color_exit$prompt_char "
+     OUT="$OUT$color_FALSE"
+     echo -e $OUT
+ }
 
-  if [ $exit_status = 0 ]; then
-    OUT="%{\e[48;5;31m%} %*%{\e[38;5;31m%}";
-  else
-    OUT="%{\e[48;5;124m%} %*%{\e[38;5;124m%}";
-  fi
-
-  OUT="$OUT%{\e[48;5;241m%}$ARROW%{\e[48;5;241;38;5;248m%} %1~%{\e[38;5;235;49m%}$ARROW %{\e[0m%}"
-  echo -e $OUT
-}
 export PROMPT='$(makePrompt)'
 
 function makeRPrompt () {
@@ -109,37 +64,6 @@ function makeRPrompt () {
   echo -e $OUT
 }
 export RPROMPT='$(makeRPrompt)'
-
-
-#echo -e "%{\e[48;5;241m%}$ARROW%{\e[48;5;241;38;5;248m%} %1d%{\e[38;5;235;49m%}$ARROW %{0m%}"
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#if [ $COLUMNS -gt 77 ]; then
-#  archey -p
-#fi
 
 source $ZSH/../zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH/../zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

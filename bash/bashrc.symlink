@@ -42,26 +42,6 @@ export HISTIGNORE='ls:history:clear'
 export HISTCONTROL=ignoreboth
 shopt -s histappend
 
-# Setting PATH for Python 2.7
-#export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
-export PATH="~/Library/Python/2.7/bin:$PATH"
-
-# Setting PATH for current directory
-export PATH=".:$PATH"
-
-# Setting PATH for pebble development
-export PATH="~/.pebble-dev/PebbleSDK-3.4/bin:$PATH"
-
-# Setting PATH for homebrew
-export PATH="/usr/local/sbin:$PATH"
-
-# Alias to show and hide files
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
-
-# Alias to run matlab through terminal
-alias matlab='/Applications/MATLAB_R2015a.app/bin/matlab -nodesktop'
-
 # Alias to connect to deepthough
 alias deepthought='ssh -l epeterson35 deepthought-login.cc.gatech.edu'
 
@@ -81,9 +61,3 @@ crun() {
 }
 
 # Github authentication for homebrew
-
-# Setting vars for Theos
-export THEOS=/opt/theos
-export PATH="$THEOS/bin:$PATH"
-export THEOS_DEVICE_IP=iPhone-6.local
-export THEOS_DEVICE_PORT=22
