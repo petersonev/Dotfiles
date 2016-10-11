@@ -1,44 +1,38 @@
-
-# Changing look of bash prompt
-#export SEGMENT="\xE2\x96\xb6"
-#export PS1="\[\033[36m\]\u:\[\033[33;1m\]\W \[\033[m\]\$ "
-#export PS1=$'\[\033[36m\]\xEE\x82\xB0 '
-#export PS1=$'\[\033[44m\]\u \[\033[43;1m\]\[\033[36m\]\xEE\x82\xB0 \[\033[30m\]\W \[\033[0m\]\[\033[33;1m\]\xEE\x82\xB0 '
-#export PS1=$'\[\033[46m\]\u \[\033[43;1m\]\[\033[36m\]\xEE\x82\xB0 \[\033[30m\]\W \[\033[0m\]\[\033[34\]\xEE\x82\xB0 '
-#export PS1=$'\\[\e[31m\\]\xe2\x88\xb4\\[\e[0m\\]\n\xe2\x86\x92 \xe2\x98\xbf \\~ \\[\e[31m\\]\xe2\x98\x85 $? \\[\e[0m\\]'
-
-#export PS1=$'\e[48;5;31m \u \e[38;5;31;48;5;241m\xEE\x82\xB0 \e[38;5;251m\W \e[38;5;235;49m\xEE\x82\xB0\e[0m '
 bind 'set completion-ignore-case on'
-#bind 'set show-all-if-ambiguous on'
-#bind 'set set completion-prefix-display-length 2'
-#bind 'Tab: menu-complete'
-#bind 'set colored-stats On'
-#bind 'set visible-stats On'
-#bind 'set completion-query-items -1'
-#bind 'set menu-complete-display-prefix Off'
 
 function makePrompt() {
-  local exit_status=$?
-  local ARROW=$'\xEE\x82\xB0'
-  local GIT=$'\xEE\x82\xA0'
-  local b="$(git symbolic-ref HEAD 2>/dev/null)";
+    local exit_status=$?
+    PS1=""
 
-  if [ $exit_status == 0 ]; then
-    PS1="\[\e[48;5;31m\] \t\[\e[38;5;31m\]";
-  else
-    PS1="\[\e[48;5;124m\] \t\[\e[38;5;124m\]";
-  fi
-  
-  #PS1="$PS1\[\e[38;5;251m\] \W \[\e[38;5;235;49m\]$ARROW"
-  #PS1="$PS1\[\e[38;5;251m\] \W "
+    local prompt_char=$'\xE2\x9D\xAF'
 
-  if [ -n "$b" ]; then
-    PS1="$PS1\[\e[48;5;28m\]$ARROW\[\e[39m\] $GIT\[\e[38;5;28m\]";
-    #${b##refs/heads/}
-  fi
-  
-  PS1="$PS1\[\e[48;5;241m\]$ARROW\[\e[48;5;241;38;5;248m\] \W\[\e[38;5;235;49m\]$ARROW \[\e[0m\]"
-  #PS1="$PS1\[\e[38;5;251m\]\W \[\e[38;5;235;49m\]$ARROW\[\e[0m\] "
+    local color_TRUE="\[\033[34m\]"
+    local color_FALSE="\[\033[37m\]"
+    local color_ERROR="\[\033[31m\]"
+
+    local color_user=$color_FALSE
+    local color_jobs=$color_FALSE
+    local color_exit=$color_TRUE
+
+    if [ "$USER" == "root" ]; then
+        color_user=$color_ERROR
+    fi
+    if [ $(jobs | wc -l | tr -d " ") -ne 0 ]; then
+        color_jobs=$color_TRUE
+    fi
+    if [ $exit_status -ne 0 ]; then
+        color_exit=$color_ERROR
+    fi
+
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        PS1="$PS1$color_TRUE\h:"
+    fi
+
+    PS1="$PS1$color_TRUE\W "
+    PS1="$PS1$color_user$prompt_char"
+    PS1="$PS1$color_jobs$prompt_char"
+    PS1="$PS1$color_exit$prompt_char "
+    PS1="$PS1$color_FALSE"
 }
 PROMPT_COMMAND=makePrompt
 export CLICOLOR=1
@@ -54,9 +48,6 @@ export PATH="~/Library/Python/2.7/bin:$PATH"
 
 # Setting PATH for current directory
 export PATH=".:$PATH"
-
-# MacPorts Installer addition on 2015-06-11_at_20:09:23: adding an appropriate PATH variable for use with MacPorts.
-#export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # Setting PATH for pebble development
 export PATH="~/.pebble-dev/PebbleSDK-3.4/bin:$PATH"
@@ -75,12 +66,6 @@ alias matlab='/Applications/MATLAB_R2015a.app/bin/matlab -nodesktop'
 alias deepthought='ssh -l epeterson35 deepthought-login.cc.gatech.edu'
 
 # Alias to connect to Pulsed Media seedbox
-seedbox() {
-if [ "$1" == "ssh" ] 
-then
-else    
-fi
-}
 # Function to compile and run C++ file with max of 3 arguments
 cpprun() {
     g++ "$1";
@@ -102,11 +87,3 @@ export THEOS=/opt/theos
 export PATH="$THEOS/bin:$PATH"
 export THEOS_DEVICE_IP=iPhone-6.local
 export THEOS_DEVICE_PORT=22
-
-#source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
-
-#powerline-daemon -q
-#POWERLINE_BASH_CONTINUATION=1
-#POWERLINE_BASH_SELECT=1
-#export POWERLINE_COMMAND=powerline
-#. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh

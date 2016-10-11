@@ -9,3 +9,6 @@ try
 source ~/.dotfiles/vim/vim_runtime/my_configs.vim
 catch
 endtry
+
+set timeoutlen=1000 ttimeoutlen=0
+set clipboard=unnamed
