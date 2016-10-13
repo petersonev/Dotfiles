@@ -109,9 +109,6 @@ link_file () {
     then
       success "skipped $src"
     fi
-  else
-    skip=true
-    success "unknown $src"
   fi
 
   if [ "$skip" != "true" ]  # "false" or empty
