@@ -4,7 +4,7 @@ export ZSH="$0:A/oh-my-zsh"
 #source ~/.zsh-private
 
 #eval "$(fasd --init posix-alias zsh-hook)"
-eval "$(fasd --init auto)"
+#eval "$(fasd --init auto)"
 
 plugins=(git)
 
