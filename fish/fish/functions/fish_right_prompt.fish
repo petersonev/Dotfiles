@@ -31,7 +31,8 @@ function fish_right_prompt
             set color_staged $fish_color_command
             set git_status 1
         end
-        if not test -z (git ls-files-root --other --exclude-standard 2> /dev/null)
+        set -l something_status (git ls-files-root --other --exclude-standard 2> /dev/null)
+        if not test -z "$something_status"
             set color_untracked $fish_color_command
             set git_status 2
         end
