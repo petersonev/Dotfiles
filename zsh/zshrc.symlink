@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$0:A/oh-my-zsh"
 
+export EDITOR="vim"
+
 #source ~/.zsh-private
 
 #eval "$(fasd --init posix-alias zsh-hook)"
