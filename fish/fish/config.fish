@@ -7,6 +7,7 @@ switch (uname -s)
     case "Linux"
         # TODO: seperate linux distros
         set PATH /usr/bin/core_perl $PATH
+        set -x QEMU "qemu-system-i386"
 end
 
 set fish_greeting ""

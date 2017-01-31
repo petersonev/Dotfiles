@@ -29,7 +29,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[gpg]
-	program = gpg1
 [commit]
 	gpgsign = true
