@@ -130,8 +130,13 @@ install_dotfiles () {
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
   done
-  for src_file in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.setup' -not -path '*.git*')
+  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink-config' -not -path '*.git*')
   do
-    bash "$src_file"
+    dst="$HOME/.config/$(basename "${src%.*}")"
+    link_file "$src" "$dst"
   done
+  #for src_file in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.setup' -not -path '*.git*')
+  #do
+  #  bash "$src_file"
+  #done
 }
