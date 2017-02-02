@@ -15,7 +15,6 @@
     branch = auto
     ui = true
 [core]
-    excludesfile = ignore
     editor = vim
 [apply]
     whitespace = nowarn
