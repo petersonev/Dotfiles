@@ -1,5 +1,5 @@
 [include]
-    path = ~/.gitconfig.local
+    path = config.local
 [hub]
     protocol = https
 [alias]
@@ -15,7 +15,6 @@
     branch = auto
     ui = true
 [core]
-    excludesfile = ~/.gitignore
     editor = vim
 [apply]
     whitespace = nowarn
