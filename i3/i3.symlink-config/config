@@ -173,6 +173,16 @@ bar {
 # bar toggle, hide or show
 bindsym $mod+m bar mode toggle
 
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute && pkill -RTMIN+10 i3blocks   #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute && pkill -RTMIN+10 i3blocks #decrease sound volume
+bindsym XF86AudioMute        exec --no-startup-id  amixer -q set Master toggle && pkill -RTMIN+10 i3blocks #mute sound
+
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+
+
 floating_modifier $mod
 
 new_window pixel 4
