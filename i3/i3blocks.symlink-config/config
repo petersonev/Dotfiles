@@ -91,7 +91,7 @@ interval=5
 [cpu_usage]
 label=CPU
 interval=10
-min_width=CPU: 100.00%
+min_width=CPU 99.99%
 #separator=false
 
 #[load_average]

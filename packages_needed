@@ -1,0 +1,6 @@
+[i3]
+sysstat     (for i3blocks CPU)
+acpi        (for i3blocks BAT)
+alsa-utils  (for i3blocks VOL)
+scrot       (for i3lock pixel)
+imagemagick (for i3lock pixel)

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [[ !(-z "$2") && "$2" -ge 0 && "$2" -le 100 ]]
+then
+
+    MAX="$(cat /sys/class/backlight/gmux_backlight/max_brightness)"
+
+    if [ "$1" = "-set" ]
+    then
+        BRIGHT=$(($MAX * $2 / 100))
+        sudo tee /sys/class/backlight/gmux_backlight/brightness <<< $BRIGHT
+        
+    fi
+
+
+    #echo "$BRIGHT"
+    #echo "Good"
+fi
+
+
+# tee /sys/class/backlight/gmux_backlight/brightness <<< 1000

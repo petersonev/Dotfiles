@@ -155,8 +155,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 mode "launcher" {
-    bindsym g exec "google-chrome-stable && i3-msg mode default"
-    bindsym x exec "gnome-terminal && i3-msg mode default"
+    bindsym g exec --no-startup-id "google-chrome-stable && i3-msg mode default"
+    bindsym x exec --no-startup-id "gnome-terminal && i3-msg mode default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -175,6 +175,7 @@ bindsym $mod+m bar mode toggle
 
 floating_modifier $mod
 
-new_window pixel
+new_window pixel 4
 
-exec compton
+exec --no-startup-id compton
+exec --no-startup-id feh --bg-fill ~/background.jpg
