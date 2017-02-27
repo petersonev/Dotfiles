@@ -155,8 +155,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 mode "launcher" {
-    bindsym g exec "google-chrome-stable && i3-msg mode default"
-    bindsym x exec "gnome-terminal && i3-msg mode default"
+    bindsym g exec --no-startup-id "google-chrome-stable && i3-msg mode default"
+    bindsym x exec --no-startup-id "gnome-terminal && i3-msg mode default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -173,8 +173,19 @@ bar {
 # bar toggle, hide or show
 bindsym $mod+m bar mode toggle
 
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute && pkill -RTMIN+10 i3blocks   #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute && pkill -RTMIN+10 i3blocks #decrease sound volume
+bindsym XF86AudioMute        exec --no-startup-id  amixer -q set Master toggle && pkill -RTMIN+10 i3blocks #mute sound
+
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+
+
 floating_modifier $mod
 
-new_window pixel
+new_window pixel 4
 
-exec compton
+exec --no-startup-id compton
+exec --no-startup-id feh --bg-fill ~/background.jpg
