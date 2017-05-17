@@ -1,7 +1,9 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$0:A/oh-my-zsh"
+export ZSH="$(dirname $(readlink -f ${(%):-%N}))/oh-my-zsh"
 
 export EDITOR="vim"
+
+stty erase '^?'
 
 #source ~/.zsh-private
 
@@ -56,8 +58,8 @@ export PROMPT='$(makePrompt)'
 
 function makeRPrompt () {
   local b="$(git symbolic-ref HEAD 2>/dev/null)";
-  local ARROW=$'\xEE\x82\xB2'
-  local GIT=$'\xEE\x82\xA0'
+  local ARROW=''  #$'\xEE\x82\xB2'
+  local GIT='g'   #$'\xEE\x82\xA0'
 
   if [ -n "$b" ]; then
     OUT="%{\e[38;5;235m%}$ARROW%{\e[48;5;241;38;5;248m%} ${b##refs/heads/} %{\e[38;5;28m%}$ARROW%{\e[48;5;28;39m%} $GIT %{\e[0m%}"
@@ -65,7 +67,66 @@ function makeRPrompt () {
 
   echo -e $OUT
 }
-export RPROMPT='$(makeRPrompt)'
+
+function makeRPrompt2 () {
+    local prompt_char=$'\xE2\x9D\xAE'
+    local is_git="$(git symbolic-ref HEAD 2>/dev/null)";
+
+    local color_TRUE="%{\033[34m%}"
+    local color_FALSE="%{\033[37m%}"
+    local color_ERROR="%{\033[31m%}"
+
+    if [ -n "$is_git" ]; then
+        local color_git=$color_FALSE
+        local color_untracked=$color_FALSE
+        local color_modified=$color_FALSE
+        local color_staged=$color_FALSE
+        local git_status=0
+
+        (git diff --cached --quiet 2> /dev/null)
+        local is_staged=$?
+        local is_untracked="$(git ls-files-root --other --exclude-standard 2> /dev/null)";
+        #(git diff --quiet 2> /dev/null)
+        #local is_modified=$?
+        local is_modified="$(git ls-files -m)"
+    
+        if [ "$is_staged" = 1 ]; then
+            local color_staged=$color_TRUE
+            local git_status=1
+        fi
+        if [[ $is_untracked = *[!\ ]* ]]; then
+            local color_untracked=$color_TRUE
+            local git_status=2
+        fi
+        if [ -n "$is_modified" ]; then 
+            local color_modified=$color_TRUE
+            local git_status=2
+        fi
+
+        case $git_status in
+            0)
+                local color_git="%{\033[32m%}"
+                ;;
+            1)
+                local color_git="%{\033[33m%}"
+                ;;
+            2)
+                local color_git=$color_ERROR
+                ;;
+        esac
+
+        local git_branch="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)";
+
+        echo -ne "$color_staged$prompt_char"
+        echo -ne "$color_modified$prompt_char"
+        echo -ne "$color_untracked$prompt_char"
+        echo -ne "$color_git $git_branch"
+        echo -ne "$color_FALSE"
+
+    fi
+}
+
+export RPROMPT='$(makeRPrompt2)'
 
 source $ZSH/../zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH/../zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
