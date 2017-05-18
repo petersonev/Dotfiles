@@ -6,7 +6,7 @@ switch (uname -s)
         set PATH $PATH /usr/local/sbin
     case "Linux"
         # TODO: seperate linux distros
-        set PATH /usr/bin/core_perl $PATH
+        #set PATH /usr/bin/core_perl $PATH
         set -x QEMU "qemu-system-i386"
 end
 

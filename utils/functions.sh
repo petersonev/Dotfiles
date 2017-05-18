@@ -1,7 +1,13 @@
 #!/bin/bash
 
-cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd -P)
+#echo "functions.sh: $0"
+#pushd "$(dirname "$0")/.."
+#DOTFILES_ROOT=$(pwd -P)
+#popd
+
+p_exist() {
+  command -v "$1" >/dev/null 2>&1
+}
 
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
@@ -19,30 +25,6 @@ fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
   exit
-}
-
-setup_gitconfig () {
-  if ! [ -f git/git.symlink-config/config.local ]
-  then
-    info 'setup gitconfig'
-
-    git_credential='cache'
-    gpg_program='gpg'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      git_credential='osxkeychain'
-      gpg_program='gpg1'
-    fi
-
-    user ' - What is your github author name?'
-    read -e git_authorname
-    user ' - What is your github author email?'
-    read -e git_authoremail
-
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" -e "s/GPG_PROGRAM/$gpg_program/g" git/config.local.example > git/git.symlink-config/config.local
-
-    success 'gitconfig'
-  fi
 }
 
 link_file () {
@@ -120,23 +102,23 @@ link_file () {
   fi
 }
 
-install_dotfiles () {
+#install_dotfiles () {
 #  info 'installing dotfiles'
 
-  local overwrite_all=false backup_all=false skip_all=false
+#  local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
-  done
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink-config' -not -path '*.git*')
-  do
-    dst="$HOME/.config/$(basename "${src%.*}")"
-    link_file "$src" "$dst"
-  done
+#  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+#  do
+#    dst="$HOME/.$(basename "${src%.*}")"
+#    link_file "$src" "$dst"
+#  done
+#  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink-config' -not -path '*.git*')
+#  do
+#    dst="$HOME/.config/$(basename "${src%.*}")"
+#    link_file "$src" "$dst"
+#  done
   #for src_file in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.setup' -not -path '*.git*')
   #do
   #  bash "$src_file"
   #done
-}
+#}
