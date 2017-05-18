@@ -29,6 +29,8 @@ fail () {
 
 link_file () {
   local src=$1 dst=$2
+  local dst_i=${dst/$HOME/"~"}
+  local src_i=${src/$HOME/"~"}
 
   local overwrite= backup= skip=
   local action=
@@ -80,25 +82,25 @@ link_file () {
     if [ "$overwrite" == "true" ]
     then
       rm -rf "$dst"
-      success "removed $dst"
+      success "removed $dst_i"
     fi
 
     if [ "$backup" == "true" ]
     then
       mv "$dst" "${dst}.backup"
-      success "moved $dst to ${dst}.backup"
+      success "moved $dst_i to ${dst_i}.backup"
     fi
 
     if [ "$skip" == "true" ]
     then
-      success "skipped $src"
+      success "skipped $dst_i"
     fi
   fi
 
   if [ "$skip" != "true" ]  # "false" or empty
   then
-    ln -s "$1" "$2"
-    success "linked $1 to $2"
+    ln -s "$src" "$dst"
+    success "linked $src_i to $dst_i"
   fi
 }
 

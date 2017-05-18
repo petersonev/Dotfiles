@@ -6,5 +6,8 @@ popd > /dev/null
 
 source "$curr/../utils/functions.sh"
 
+git submodule update --init vim/vim_runtime
+info "vim submodules updated"
+
 overwrite_all=false backup_all=false skip_all=false
-link_file "$curr/tmux.conf.symlink"   "$HOME/.tmux.conf"
+link_file "$curr/vimrc.symlink"   "$HOME/.vimrc"
