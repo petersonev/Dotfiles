@@ -1,9 +1,16 @@
-set runtimepath+=~/.vim_runtime
+let my_runtimepath = substitute(system("dirname ".expand("%:p")) . '/vim_runtime', '\n','','')
+"exe 'set runtimepath+=' . my_runtimepath
+"exe 'set runtimepath+=' . substitute(system("dirname ".expand("%:p")) . '/vim_runtime', '\n','','')
+let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_runtime', '\n','','')
+exe 'set runtimepath+=' . my_runtimepath
+"let runtimepath2=substitute(system("dirname ".expand("%:p")) . '/vim_runtime', '\n','','')
+"set runtimepath+=runtimepath2
+"set runtimepath+=~/.dotfiles/vim/vim_runtime/
 
 runtime vimrcs/basic.vim
 runtime vimrcs/filetypes.vim
-runtime vimrcs/plugins_config.vim
-runtime vimrcs/extended.vim
+runtime ../plugins_config.vim
+runtime ../extended.vim
 
 try
 runtime my_configs.vim

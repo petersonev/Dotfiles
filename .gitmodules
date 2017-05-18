@@ -1,5 +1,5 @@
 [submodule "vim/vim_runtime"]
-	path = vim/vim_runtime.symlink
+	path = vim/vim_runtime
 	url = https://github.com/amix/vimrc
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
