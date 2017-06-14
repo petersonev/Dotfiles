@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd $(dirname $0) > /dev/null
+pushd $(dirname $BASH_SOURCE) > /dev/null
 curr=$(pwd)
 popd > /dev/null
 
@@ -11,5 +11,4 @@ git submodule update --init zsh/zsh-autosuggestions/
 git submodule update --init zsh/zsh-syntax-highlighting/
 info "zsh submodules updated"
 
-overwrite_all=false backup_all=false skip_all=false
 link_file "$curr/zshrc.symlink"   "$HOME/.zshrc"

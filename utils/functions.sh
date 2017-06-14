@@ -32,6 +32,11 @@ link_file () {
   local dst_i=${dst/$HOME/"~"}
   local src_i=${src/$HOME/"~"}
 
+
+  overwrite_all="${overwrite_all:-false}"
+  backup_all="${backup_all:-false}"
+  skip_all="${skip_all:-false}"
+  
   local overwrite= backup= skip=
   local action=
 
@@ -103,6 +108,8 @@ link_file () {
     success "linked $src_i to $dst_i"
   fi
 }
+
+
 
 #install_dotfiles () {
 #  info 'installing dotfiles'

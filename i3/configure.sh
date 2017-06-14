@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd $(dirname $0) > /dev/null
+pushd $(dirname $BASH_SOURCE) > /dev/null
 curr=$(pwd)
 popd > /dev/null
 
@@ -12,6 +12,5 @@ if ! p_exist "i3"; then
 fi
 #TODO: Check for i3blocks and anything else
 
-overwrite_all=false backup_all=false skip_all=false
 link_file "$curr/i3.symlink-config"         "$HOME/.config/i3"
 link_file "$curr/i3blocks.symlink-config"   "$HOME/.config/i3blocks"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd $(dirname $0) > /dev/null
+pushd $(dirname $BASH_SOURCE) > /dev/null
 curr=$(pwd)
 popd > /dev/null
 
@@ -27,5 +27,4 @@ if ! [ -f $curr/git.symlink-config/config.local ]; then
     success 'gitconfig'
 fi
 
-overwrite_all=false backup_all=false skip_all=false
 link_file "$curr/git.symlink-config"   "$HOME/.config/git"
