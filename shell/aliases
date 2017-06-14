@@ -1,0 +1,19 @@
+alias ll='ls -lhA'
+alias la='ls -a'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias mv='mv -i'
+alias cp='cp -ri'
+alias ln='ln -i'
+# TODO: alias for rm to trash
+alias sudo='sudo -E'
+alias ipx='curl ifconfig.me'    # Get external IP
+# TODO: ssh copy
+
+alias reboot='sudo reboot'
+
+function mcd
+    mkdir -p -- "$argv[1]"
+    cd -- "$argv[1]"
+end
