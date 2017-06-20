@@ -5,6 +5,7 @@ runtime vimrcs/basic.vim
 runtime vimrcs/filetypes.vim
 runtime ../plugins_config.vim
 runtime ../extended.vim
+runtime ../fish.vim
 
 try
 runtime my_configs.vim
