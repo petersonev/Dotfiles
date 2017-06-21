@@ -13,7 +13,3 @@ alias ipx='curl ifconfig.me'    # Get external IP
 
 alias reboot='sudo reboot'
 
-function mcd
-    mkdir -p -- "$argv[1]"
-    cd -- "$argv[1]"
-end

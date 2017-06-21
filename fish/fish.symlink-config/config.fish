@@ -1,5 +1,9 @@
 # This is fish config
 
+pushd (dirname (status -f)) > /dev/null
+set curr (pwd)
+popd > /dev/null
+
 switch (uname -s)
     case "Darwin"
         # Used for macOS
@@ -17,6 +21,8 @@ set --export XDG_CONFIG_HOME "$HOME/.config"
 
 set -x LC_ALL en_US.UTF-8  
 set -x LANG en_US.UTF-8
+
+source $curr/../../shell/aliases
 
 # Less/man colors
 #set -x LESS_TERMCAP_mb (printf "\033[01;31m")  
