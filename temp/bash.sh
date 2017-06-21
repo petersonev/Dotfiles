@@ -1,14 +1,20 @@
 #!/bin/bash
+echo $BASH_SOURCE
+echo $0
 
-_SHELL=$(ps -o comm= $PPID)
-
-set_fish() {
-    echo "set -xg $1 $2" >&3
-}
+if [[ $BASH_SOURCE != $0 ]]; then
+    # Script is being sourced
+    _SHELL=$(ps -o comm= $$)
+else 
+    # Script run as sub shell
+    _SHELL=$(ps -o comm= $PPID)
+fi
+_SHELL=${_SHELL##-}
+echo $_SHELL
 
 _set() {
     export $1=$2
-    if [ $_SHELL == "-fish" ]; then
+    if [ $_SHELL == "fish" ]; then
         echo "set -xg $1 $2" >&3
     fi
 }
@@ -21,15 +27,14 @@ print_test() {
     echo $test34
     return 10
 }
-# This allows functions from the script to be called as parameters when run
 
-#echo $SHELL
+mkd() { mkdir -p "${@}" && cd "${@: -1}"; }
+
 #TODO Check if this always works
-if [ $(ps -o comm= $PPID) == "-fish" ]; then
-    echo "running fish"
+if [ $_SHELL == "fish" ]; then
+    # This allows functions from the script to be called as parameters when run
     $@
-    echo "set _status $?" >&3
-    exit 9
-    #cd $(pwd)
+    _status=$?
+    echo "cd $(pwd)" >&3
+    echo "set _status $_status" >&3
 fi
-
