@@ -1,3 +1,13 @@
+
+pushd $(dirname $0) > /dev/null
+curr=$(pwd)
+popd > /dev/null
+
+source $curr/../shell/functions.sh
+source $curr/../shell/aliases.sh
+source $curr/../shell/variables.sh
+
+# Bash specific functions
 bind 'set completion-ignore-case on'
 
 function makePrompt() {
@@ -41,25 +51,3 @@ export CLICOLOR=1
 export HISTIGNORE='ls:history:clear'
 export HISTCONTROL=ignoreboth
 shopt -s histappend
-
-# Alias to connect to deepthough
-alias deepthought='ssh -l epeterson35 deepthought-login.cc.gatech.edu'
-
-export EDITOR="vim"
-
-# Alias to connect to Pulsed Media seedbox
-# Function to compile and run C++ file with max of 3 arguments
-cpprun() {
-    g++ "$1";
-    ./a.out "$2" "$3";
-    rm a.out;
-}
-
-# Function to compile and run C file with max of 3 arguments
-crun() {
-    gcc "$1";
-    ./a.out "$2";
-    rm a.out;
-}
-
-# Github authentication for homebrew

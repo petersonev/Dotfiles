@@ -1,6 +1,10 @@
 #!/bin/bash
 
-source internals.sh
+pushd $(dirname $BASH_SOURCE) > /dev/null
+curr=$(pwd)
+popd > /dev/null
+
+source $curr/internals.sh
 
 ########################################
 #              Aliases                 #
@@ -14,3 +18,6 @@ _add_alias ln 'ln -i'
 # TODO: alias for rm to trash
 _add_alias sudo 'sudo -E'
 _add_alias ipx 'curl ifconfig.me'    # Get external IP
+
+# Alias to connect to deepthough
+_add_alias deepthought 'ssh -l epeterson35 deepthought-login.cc.gatech.edu'

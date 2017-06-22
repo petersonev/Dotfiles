@@ -1,6 +1,10 @@
 #!/bin/bash
 
-source internals.sh
+pushd $(dirname $BASH_SOURCE) > /dev/null
+curr=$(pwd)
+popd > /dev/null
+
+source $curr/internals.sh
 
 ########################################
 #        Universal functions           #

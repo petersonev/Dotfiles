@@ -29,7 +29,8 @@ _SHELL=${_SHELL##-}
 if [ $_SHELL == "fish" ]; then
     if ! { >&3; } 2> /dev/null; then
         # not correctly run from fish (fd 3 does not exist)
-        exit 1
+        #exit 1
+        echo "fd 3 no exist"
     fi
 fi
 
