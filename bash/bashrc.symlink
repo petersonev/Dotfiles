@@ -1,5 +1,6 @@
 
-pushd $(dirname $0) > /dev/null
+#TODO realpath doesn't work on all machines
+pushd $(dirname $(realpath $BASH_SOURCE)) > /dev/null
 curr=$(pwd)
 popd > /dev/null
 
