@@ -41,7 +41,7 @@ _add_var() {
     #TODO check stuff?
     if [ $_SHELL == "fish" ]; then
         if [ $1 == "PATH" ]; then
-            echo "set -xg $1 \"${2//:/ }\"" >&3
+            echo "set -xg $1 ${2//:/ }" >&3
         else
             echo "set -xg $1 \"$2\"" >&3
         fi

@@ -16,7 +16,9 @@ set _bash_func_script "functions.sh"
 set _bash_alias_script "aliases.sh"
 set _bash_var_script "variables.sh"
 
-set _bash_functions (bash -c ". $_bash_func_script; typeset -F" | grep "declare -f" | sed -e "s/^declare -f //" -e '/^_/ d')
+#set _bash_functions (bash -c ". $_bash_func_script; typeset -F" | grep "declare -f" | sed -e "s/^declare -f //" -e '/^_/ d')
+set _bash_functions (bash -c ". $_bash_func_script; compgen -A function" | sed -e '/^_/ d')
+echo $_bash_functions
 
 # Add all functions
 for _func in $_bash_functions

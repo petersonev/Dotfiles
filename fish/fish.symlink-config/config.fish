@@ -1,5 +1,7 @@
 # This is fish config
 
+echo path: $PATH
+
 pushd (dirname (status -f)) > /dev/null
 set curr (pwd)
 popd > /dev/null
@@ -7,7 +9,7 @@ popd > /dev/null
 switch (uname -s)
     case "Darwin"
         # Used for macOS
-        set PATH $PATH /usr/local/sbin
+        #set PATH $PATH /usr/local/sbin
     case "Linux"
         # TODO: seperate linux distros
         #set PATH /usr/bin/core_perl $PATH
