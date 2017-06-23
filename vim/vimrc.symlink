@@ -1,41 +1,11 @@
 let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_source', '\n','','')
 exe 'set runtimepath+=' . my_runtimepath
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable 
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
-" Colorscheme
-set background=dark
-colorscheme peaksea
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
+call pathogen#infect(my_runtimepath . '/bundle/{}')
 
 
-
-
-"runtime vimrcs/basic.vim
-runtime vimrcs/filetypes.vim
+"runtime ../vim_runtime/vimrcs/basic.vim
+"runtime vimrcs/filetypes.vim
 "runtime ../plugins_config.vim
 "runtime ../extended.vim
 "runtime ../fish.vim
@@ -45,8 +15,8 @@ runtime my_configs.vim
 catch
 endtry
 
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+"nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 set timeoutlen=1000 ttimeoutlen=0
 set clipboard=unnamed
