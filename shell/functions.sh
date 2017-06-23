@@ -30,6 +30,7 @@ mkdd() {
 }
 
 home() {
+    # Connect to server
     case "$1" in
     "attach")
         ssh -p 9000 -t -XY petersonev.com 'tmux new -A -s ssh'
@@ -43,6 +44,32 @@ home() {
     esac
 }
 
+sd() {
+    # Get directory sizes and sort by size
+    du -ah --max-depth=1 $1 | sort -hr
+}
+
+_NOTES="$HOME/.notes.txt"
+no() {
+    # Create or append to notes file
+    # Alias noa for no -a
+    if [ "$#" -eq 0 ]; then
+        if [ $EDITOR == "vim" ]; then
+            vim "+normal G" $_NOTES
+        else
+            $EDITOR $_NOTES
+        fi
+    elif [ "$1" == "-a" ]; then
+        if [ $EDITOR == "vim" ]; then
+            #echo -e "\n$(date $DATE_FORMAT)" >> $_NOTES
+            vim "+normal Go$(date $DATE_FORMAT)" +startinsert $_NOTES
+        else
+            $EDITOR $_NOTES
+        fi
+    else
+        echo -e "\n$(date $DATE_FORMAT)\n${*}" >> $_NOTES
+    fi
+}
 
 ########################################
 #        Misc for other shells         #

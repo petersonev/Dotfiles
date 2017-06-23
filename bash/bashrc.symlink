@@ -1,6 +1,9 @@
 
-#TODO realpath doesn't work on all machines
-pushd $(dirname $(realpath $BASH_SOURCE)) > /dev/null
+if [ -L $BASH_SOURCE ]; then
+    pushd $(dirname $(readlink $BASH_SOURCE)) > /dev/null
+else
+    pushd $(dirname $BASH_SOURCE) > /dev/null
+fi
 curr=$(pwd)
 popd > /dev/null
 

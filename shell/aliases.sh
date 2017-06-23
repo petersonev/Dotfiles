@@ -21,3 +21,7 @@ _add_alias ipx 'curl ifconfig.me'    # Get external IP
 
 # Alias to connect to deepthough
 _add_alias deepthought 'ssh -l epeterson35 deepthought-login.cc.gatech.edu'
+
+# Aliases specific for custom functions
+# TODO check if functions are loaded
+_add_alias noa 'no -a'
