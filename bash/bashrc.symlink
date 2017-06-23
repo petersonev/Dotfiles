@@ -1,9 +1,4 @@
 
-echo "_ $_"
-echo "0 $0"
-echo "BASH_SOURCE 0 ${BASH_SOURCE[0]}"
-echo "BASH_SOURCE 1 ${BASH_SOURCE[1]}"
-
 if [ -L $BASH_SOURCE ]; then
     pushd $(dirname $(readlink $BASH_SOURCE)) > /dev/null
 else

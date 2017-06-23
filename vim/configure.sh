@@ -7,7 +7,7 @@ popd > /dev/null
 source "$curr/../utils/functions.sh"
 
 
-git submodule update --init vim/vim_runtime
+git submodule update --init $curr/vim_runtime
 info "vim submodules updated"
 
 link_file "$curr/vimrc.symlink"   "$HOME/.vimrc"
