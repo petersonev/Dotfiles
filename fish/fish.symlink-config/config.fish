@@ -22,7 +22,7 @@ set _bash_functions (bash -c ". $_bash_func_script; compgen -A function" | sed -
 
 # Add all functions
 for _func in $_bash_functions
-#    _bash_function $_bash_func_script $_func
+    _bash_function $_bash_func_script $_func
 end
 
 # Add all aliases

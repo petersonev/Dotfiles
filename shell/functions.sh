@@ -46,7 +46,7 @@ home() {
 
 sd() {
     # Get directory sizes and sort by size
-    du -ah --max-depth=1 $1 | sort -hr
+    du -ah -d 1 $1 | sort -hr
 }
 
 _NOTES="$HOME/.notes.txt"
