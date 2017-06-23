@@ -9,6 +9,7 @@
     rank-contributors = !$ZSH/bin/git-rank-contributors
     count   = !git shortlog -sn
     ls-files-root = ! git ls-files
+    sup = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 [color]
     diff = auto
     status = auto

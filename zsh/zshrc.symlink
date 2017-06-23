@@ -1,7 +1,48 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$(dirname $(readlink -f ${(%):-%N}))/oh-my-zsh"
 
+if [ -L ${(%):-%N} ]; then
+    pushd $(dirname $(readlink ${(%):-%N})) > /dev/null
+else
+    pushd $(dirname ${(%):-%N}) > /dev/null
+fi
+curr=$(pwd)
+popd > /dev/null
+
+
+function _bash_function () {
+	# Yes this IO redirection works
+    eval "$2() { exec 4>&1; bash $1 $2 \$@ 3>&1 >&- >&4 | while read line; do eval \$line; if [ -n \"\$_status\" ]; then return \$_status; exec 4>&-; fi; done; exec 4>&-;  }"
+}
+
+function _bash_run () {
+    eval "exec 4>&1; bash $1 \$@ 3>&1 >&- >&4 | while read line; do eval \$line; if [ -n \"\$_status\" ]; then return \$_status; exec 3>&-; fi; done"
+}
+
+_bash_func_script="$curr/../shell/functions.sh"
+_bash_alias_script="$curr/../shell/aliases.sh"
+_bash_var_script="$curr/../shell/variables.sh"
+
+_bash_functions=$(bash -c ". $_bash_func_script > /dev/null; compgen -A function" | sed -e '/^_/ d')
+#echo $_bash_functions
+
+# Add all functions
+echo $_bash_functions | while read _func; do
+    _bash_function $_bash_func_script $_func
+    #echo $_func
+done
+
+# Add all aliases
+_bash_run $_bash_alias_script
+
+# Add all variables
+_bash_run $_bash_var_script
+
+
+
+
+export ZSH="$curr/oh-my-zsh"
 export EDITOR="vim"
+
 
 stty erase '^?'
 

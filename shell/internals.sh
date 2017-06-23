@@ -8,13 +8,6 @@
 #echo "lkjlkjklj"
 
 #TODO Check if this always works
-#if [[ $BASH_SOURCE != $0 ]]; then
-    # Script is being sourced
-#    _SHELL=$(ps -o comm= $$)
-#else 
-    # Script run as sub shell
-#    _SHELL=$(ps -o comm= $PPID)
-#fi
 if [[ $0 = "bash" ]]; then
     # Being sourced from bash
     # TODO check if sourced from something else
@@ -24,13 +17,11 @@ else
 fi
 
 _SHELL=${_SHELL##-}
-#echo $_SHELL
 
-if [ $_SHELL == "fish" ]; then
+if [ $_SHELL == "fish" ] || [ $_SHELL == "zsh" ]; then
     if ! { >&3; } 2> /dev/null; then
         # not correctly run from fish (fd 3 does not exist)
-        #exit 1
-        echo "fd 3 no exist"
+        exit 1
     fi
 fi
 
@@ -46,6 +37,8 @@ _add_var() {
         else
             echo "set -xg $1 \"$2\"" >&3
         fi
+	elif [ $_SHELL == "zsh" ]; then
+		echo "export $1=$2" >&3
     fi
 }
 
@@ -55,6 +48,8 @@ _add_alias() {
    #TODO check stuff
    alias ${_alias}="${_cmd}"
    if [ $_SHELL == "fish" ]; then
+       echo "alias ${_alias}=\"${_cmd}\"" >&3
+   elif [ $_SHELL == "zsh" ]; then
        echo "alias ${_alias}=\"${_cmd}\"" >&3
    fi
 }

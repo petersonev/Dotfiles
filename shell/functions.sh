@@ -74,7 +74,7 @@ no() {
 ########################################
 #        Misc for other shells         #
 ########################################
-if [ $_SHELL == "fish" ]; then
+if [ $_SHELL == "fish" ] || [ $_SHELL == "zsh" ]; then
     # This allows functions from the script to be called as parameters when run
     $@
     _status=$?
