@@ -1,11 +1,44 @@
-let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_runtime', '\n','','')
+let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_source', '\n','','')
 exe 'set runtimepath+=' . my_runtimepath
 
-runtime vimrcs/basic.vim
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable 
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+" Colorscheme
+set background=dark
+colorscheme peaksea
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+
+
+
+"runtime vimrcs/basic.vim
 runtime vimrcs/filetypes.vim
-runtime ../plugins_config.vim
-runtime ../extended.vim
-runtime ../fish.vim
+"runtime ../plugins_config.vim
+"runtime ../extended.vim
+"runtime ../fish.vim
 
 try
 runtime my_configs.vim
