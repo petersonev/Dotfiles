@@ -2,18 +2,10 @@ let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) 
 exe 'set runtimepath+=' . my_runtimepath
 
 call pathogen#infect(my_runtimepath . '/bundle/{}')
+call pathogen#helptags()
 
-
-"runtime ../vim_runtime/vimrcs/basic.vim
-"runtime vimrcs/filetypes.vim
-"runtime ../plugins_config.vim
-"runtime ../extended.vim
-"runtime ../fish.vim
-
-try
-runtime my_configs.vim
-catch
-endtry
+" Reads .md files as markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 "nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>

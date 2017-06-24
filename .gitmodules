@@ -13,3 +13,12 @@
 [submodule "vim/vim_source/bundle/lightline.vim"]
 	path = vim/vim_source/bundle/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
+[submodule "vim/vim_source/bundle/fish.vim"]
+	path = vim/vim_source/bundle/fish.vim
+	url = https://github.com/dag/vim-fish
+[submodule "vim/vim_source/bundle/commentary.vim"]
+	path = vim/vim_source/bundle/commentary.vim
+	url = https://github.com/tpope/vim-commentary
+[submodule "vim/vim_source/bundle/nerdtree.vim"]
+	path = vim/vim_source/bundle/nerdtree.vim
+	url = https://github.com/scrooloose/nerdtree
