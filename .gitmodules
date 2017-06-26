@@ -22,3 +22,9 @@
 [submodule "vim/vim_source/bundle/nerdtree.vim"]
 	path = vim/vim_source/bundle/nerdtree.vim
 	url = https://github.com/scrooloose/nerdtree
+[submodule "vim/vim_source/bundle/fugitive.vim"]
+	path = vim/vim_source/bundle/fugitive.vim
+	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/vim_source/bundle/gitgutter.vim"]
+	path = vim/vim_source/bundle/gitgutter.vim
+	url = https://github.com/airblade/vim-gitgutter
