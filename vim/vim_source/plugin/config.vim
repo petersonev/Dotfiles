@@ -2,6 +2,15 @@
 "Saves marks, 1000 lines per register, limit register to 100KB,
 "disables highlighting at start
 set viminfo='100,<1000,s100,h
+set updatetime=250
+
+let g:gitgutter_override_sign_column_highlight = 0
+hi SignColumn ctermbg=235
+hi GitGutterAdd ctermbg=235 ctermfg=lightgreen
+hi LineNr ctermbg=235
+set colorcolumn=80
+hi ColorColumn ctermbg=238
+hi FoldColumn	ctermfg=DarkGrey ctermbg=235 cterm=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
