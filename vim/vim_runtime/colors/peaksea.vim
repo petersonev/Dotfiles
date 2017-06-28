@@ -494,7 +494,7 @@ elseif &background=='dark'
     hi Normal		ctermfg=252	ctermbg=234	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
     "hi Normal		ctermfg=252	ctermbg=NONE	cterm=NONE
-    hi Comment		ctermfg=186	ctermbg=NONE	cterm=NONE
+    hi Comment		ctermfg=242	ctermbg=NONE	cterm=NONE
     hi Constant		ctermfg=110	ctermbg=NONE	cterm=NONE
     hi Number		ctermfg=179	ctermbg=NONE	cterm=NONE
     hi Identifier	ctermfg=219	ctermbg=NONE	cterm=NONE

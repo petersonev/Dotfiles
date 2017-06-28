@@ -11,20 +11,20 @@
 	path = zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "vim/vim_source/bundle/lightline.vim"]
-	path = vim/vim_source/bundle/lightline.vim
+	path = vim/vim_runtime/bundle/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
 [submodule "vim/vim_source/bundle/fish.vim"]
-	path = vim/vim_source/bundle/fish.vim
+	path = vim/vim_runtime/bundle/fish.vim
 	url = https://github.com/dag/vim-fish
 [submodule "vim/vim_source/bundle/commentary.vim"]
-	path = vim/vim_source/bundle/commentary.vim
+	path = vim/vim_runtime/bundle/commentary.vim
 	url = https://github.com/tpope/vim-commentary
 [submodule "vim/vim_source/bundle/nerdtree.vim"]
-	path = vim/vim_source/bundle/nerdtree.vim
+	path = vim/vim_runtime/bundle/nerdtree.vim
 	url = https://github.com/scrooloose/nerdtree
 [submodule "vim/vim_source/bundle/fugitive.vim"]
-	path = vim/vim_source/bundle/fugitive.vim
+	path = vim/vim_runtime/bundle/fugitive.vim
 	url = https://github.com/tpope/vim-fugitive
 [submodule "vim/vim_source/bundle/gitgutter.vim"]
-	path = vim/vim_source/bundle/gitgutter.vim
+	path = vim/vim_runtime/bundle/gitgutter.vim
 	url = https://github.com/airblade/vim-gitgutter

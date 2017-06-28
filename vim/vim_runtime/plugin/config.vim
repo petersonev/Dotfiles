@@ -6,11 +6,22 @@ set updatetime=250
 
 let g:gitgutter_override_sign_column_highlight = 0
 hi SignColumn ctermbg=235
-hi GitGutterAdd ctermbg=235 ctermfg=lightgreen
+"hi GitGutterAdd ctermbg=235 ctermfg=lightgreen
+hi GitGutterAdd ctermfg=84 ctermbg=235
+hi GitGutterChange ctermfg=186 ctermbg=235
+hi GitGutterDelete ctermfg=209 ctermbg=235
 hi LineNr ctermbg=235
-set colorcolumn=80
-hi ColorColumn ctermbg=238
+
+" set colorcolumn=80
+" hi ColorColumn ctermbg=238
+let &colorcolumn=join(range(81,999),",")
+hi ColorColumn ctermbg=233
+
 hi FoldColumn	ctermfg=DarkGrey ctermbg=235 cterm=NONE
+
+set tags=tags;/
+
+" let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -110,7 +121,7 @@ endif
 
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+"set foldcolumn=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

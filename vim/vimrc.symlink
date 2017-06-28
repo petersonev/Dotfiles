@@ -1,4 +1,4 @@
-let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_source', '\n','','')
+let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_runtime', '\n','','')
 exe 'set runtimepath+=' . my_runtimepath
 
 call pathogen#infect(my_runtimepath . '/bundle/{}')
