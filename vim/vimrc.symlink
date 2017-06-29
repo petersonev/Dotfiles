@@ -5,6 +5,7 @@ call pathogen#infect(my_runtimepath . '/bundle/{}')
 call pathogen#helptags()
 
 autocmd FileType c,cpp,java setlocal commentstring=//\ %s
+let g:vimsyn_folding='af'
 
 function! MyFoldText() " {{{
     let line = getline(v:foldstart)
@@ -25,6 +26,7 @@ set foldtext=MyFoldText()
 
 setlocal foldmethod=syntax
 setlocal nofoldenable
+filetype plugin on
 
 " Reads .md files as markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
