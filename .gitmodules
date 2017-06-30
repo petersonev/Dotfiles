@@ -28,3 +28,6 @@
 [submodule "vim/vim_source/bundle/gitgutter.vim"]
 	path = vim/vim_runtime/bundle/gitgutter.vim
 	url = https://github.com/airblade/vim-gitgutter
+[submodule "vim/vim_runtime/bundle/tagbar.vim"]
+	path = vim/vim_runtime/bundle/tagbar.vim
+	url = https://github.com/majutsushi/tagbar

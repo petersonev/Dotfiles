@@ -4,24 +4,18 @@
 set viminfo='100,<1000,s100,h
 set updatetime=250
 
-let g:gitgutter_override_sign_column_highlight = 0
-hi SignColumn ctermbg=235
-"hi GitGutterAdd ctermbg=235 ctermfg=lightgreen
-hi GitGutterAdd ctermfg=84 ctermbg=235
-hi GitGutterChange ctermfg=186 ctermbg=235
-hi GitGutterDelete ctermfg=209 ctermbg=235
-hi LineNr ctermbg=235
 
-" set colorcolumn=80
-" hi ColorColumn ctermbg=238
-let &colorcolumn=join(range(81,999),",")
-hi ColorColumn ctermbg=233
-
-hi FoldColumn	ctermfg=DarkGrey ctermbg=235 cterm=NONE
-
+" Find tags file in higher directories
 set tags=tags;/
 
-" let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/'
+" Set folding to syntax by default and open all folds
+set foldmethod=syntax
+set foldlevel=10
+set nofoldenable
+
+" Enable vimscript folding
+let g:vimsyn_folding='af'
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General

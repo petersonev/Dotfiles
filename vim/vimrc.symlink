@@ -1,38 +1,4 @@
 let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_runtime', '\n','','')
 exe 'set runtimepath+=' . my_runtimepath
 
-call pathogen#infect(my_runtimepath . '/bundle/{}')
-call pathogen#helptags()
-
-autocmd FileType c,cpp,java setlocal commentstring=//\ %s
-let g:vimsyn_folding='af'
-
-function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-
-setlocal foldmethod=syntax
-setlocal nofoldenable
-filetype plugin on
-
-" Reads .md files as markdown
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-
-"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-"nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
-set timeoutlen=1000 ttimeoutlen=0
-set clipboard=unnamed
+runtime plugins.vim
