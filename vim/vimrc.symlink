@@ -2,3 +2,44 @@ let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) 
 exe 'set runtimepath+=' . my_runtimepath
 
 runtime plugins.vim
+" function! IsNerdTreeEnabled()
+"     return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+" endfunction
+
+try
+    let s:sessiondir = my_runtimepath . '/.temp_dirs/sessiondir/'
+    silent call system('mkdir -p ' . sessiondir)
+catch
+endtry
+let s:shafile = s:sessiondir . sha256(getcwd())
+
+
+fu! SaveSess()
+    execute 'NERDTreeClose'
+    execute 'mksession! ' . s:shafile
+    execute 'wqa'
+endfunction
+
+
+fu! RestoreSess()
+    if expand('%:t') ==? ""
+        if filereadable(s:shafile)
+            execute 'so ' . s:shafile
+            if bufexists(1)
+                for l in range(1, bufnr('$'))
+                    if bufwinnr(l) == -1
+                        exec 'sbuffer ' . l
+                    endif
+                endfor
+            endif
+        endif
+    endif
+endfunction
+
+" autocmd BufEnter * lcd %:p:h
+" map <leader>r :NERDTreeFind<cr>
+autocmd VimEnter * nested call RestoreSess()
+" let mapleader = ","
+" map <leader>ne :NERDTree<cr>
+" nmap <leader>ws :call SaveSess()<cr>
+command S call SaveSess()
