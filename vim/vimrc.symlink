@@ -1,6 +1,7 @@
 let my_runtimepath = substitute(system("dirname ".resolve(expand('<sfile>:p'))) . '/vim_runtime', '\n','','')
 exe 'set runtimepath+=' . my_runtimepath
 
+
 runtime plugins.vim
 " function! IsNerdTreeEnabled()
 "     return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
@@ -8,7 +9,7 @@ runtime plugins.vim
 
 try
     let s:sessiondir = my_runtimepath . '/.temp_dirs/sessiondir/'
-    silent call system('mkdir -p ' . sessiondir)
+    silent call system('mkdir -p ' . s:sessiondir)
 catch
 endtry
 let s:shafile = s:sessiondir . sha256(getcwd())
@@ -22,6 +23,7 @@ endfunction
 
 
 fu! RestoreSess()
+    :set lazyredraw
     if expand('%:t') ==? ""
         if filereadable(s:shafile)
             execute 'so ' . s:shafile
@@ -43,3 +45,5 @@ autocmd VimEnter * nested call RestoreSess()
 " map <leader>ne :NERDTree<cr>
 " nmap <leader>ws :call SaveSess()<cr>
 command S call SaveSess()
+
+" :set ttyfast
