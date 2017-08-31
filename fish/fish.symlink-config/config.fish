@@ -34,6 +34,7 @@ _bash_run $_bash_var_script
 
 # Fish specific variables
 set fish_greeting ""
+set fish_color_command 005fd7
 
 # Less/man colors
 #set -x LESS_TERMCAP_mb (printf "\033[01;31m")  
