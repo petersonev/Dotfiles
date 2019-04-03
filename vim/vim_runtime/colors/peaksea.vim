@@ -29,6 +29,7 @@
 " Colors Order:
 "	#rrggbb
 "
+" TODO: differentiate Search and IncSearch for other colors
 
 hi clear
 
@@ -531,7 +532,7 @@ elseif &background=='dark'
     hi DiffDelete	ctermfg=69	ctermbg=234	cterm=NONE
     hi DiffText		ctermfg=16	ctermbg=150	cterm=NONE
     hi SignColumn	ctermfg=254	ctermbg=28	cterm=NONE
-    hi IncSearch	ctermfg=White	ctermbg=DarkRed	cterm=NONE
+    hi IncSearch	ctermfg=Black	ctermbg=LightRed	cterm=NONE
     hi StatusLineNC	ctermfg=16	ctermbg=250	cterm=NONE
     hi VertSplit	ctermfg=16	ctermbg=250	cterm=NONE
     hi Underlined	ctermfg=111	ctermbg=NONE	cterm=underline 

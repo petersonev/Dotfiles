@@ -46,4 +46,6 @@ autocmd VimEnter * nested call RestoreSess()
 " nmap <leader>ws :call SaveSess()<cr>
 command S call SaveSess()
 
+:set mouse=a
+
 " :set ttyfast

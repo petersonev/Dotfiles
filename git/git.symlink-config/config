@@ -17,6 +17,7 @@
     ui = true
 [core]
     editor = vim
+    pager = less -+F
 [apply]
     whitespace = nowarn
 [mergetool]
@@ -35,3 +36,13 @@
 	program = /usr/local/bin/gpg
 [push]
 	default = current
+[merge]
+    prompt = true
+	tool = p4mergetool
+[mergetool "p4mergetool"]
+    #TODO: make configurable
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$LOCAL $PWD/$REMOTE $PWD/$MERGED
+    trustExitCode = false
+    keepBackup = false
+[difftool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE

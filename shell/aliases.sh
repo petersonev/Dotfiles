@@ -25,3 +25,7 @@ _add_alias deepthought 'ssh -l epeterson35 deepthought-login.cc.gatech.edu'
 # Aliases specific for custom functions
 # TODO check if functions are loaded
 _add_alias noa 'no -a'
+
+# TODO: more git aliases
+_add_alias gs 'git status'
+_add_alias t 'trash'

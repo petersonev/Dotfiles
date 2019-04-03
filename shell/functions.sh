@@ -71,6 +71,20 @@ no() {
     fi
 }
 
+hr() {
+    # TODO: fix for non bash
+    jot -b '-' -s '' ${COLUMNS:-$(tput cols)}
+}
+
+format-c() {
+    if $(git symbolic-ref HEAD > /dev/null 2>&1); then
+        FILES=$(git ls-files | egrep -w -i '.*\.(h|c|cpp|hpp)')
+    else
+        FILES=$(find . -iname *.h -o -iname *.c -o -iname *.cpp -o -iname *.hpp)
+    fi
+    clang-format -style=file -i -fallback-style=none --verbose $FILES
+}
+
 ########################################
 #        Misc for other shells         #
 ########################################
